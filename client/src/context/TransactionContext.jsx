@@ -106,7 +106,7 @@ export const TransactionsProvider = ({ children }) => {
       if (ethereum) {
         const { addressTo, amount, keyword, message } = formData;
         const transactionsContract = createEthereumContract();
-        const parsedAmount = ethers.utils.parseEther(amount);
+        const parsedAmount = ethers.parseEther(amount);
 
         await ethereum.request({
           method: "eth_sendTransaction",
@@ -114,7 +114,7 @@ export const TransactionsProvider = ({ children }) => {
             from: currentAccount,
             to: addressTo,
             gas: "0x5208",
-            value: parsedAmount._hex,
+            value: parsedAmount.toString(16), //0.00001
           }],
         });
 
